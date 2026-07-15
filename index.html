@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Для тебя... <3</title>
-    <!-- Подключаем стильный, современный и очень жирный шрифт Montserrat -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
-    
     <style>
         * {
             box-sizing: border-box;
@@ -18,11 +13,8 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            /* Анимированный переливающийся фон */
-            background: linear-gradient(45deg, #ffc2d1, #ffe5ec, #ffd6df, #ffb7b2);
-            background-size: 400% 400%;
-            animation: gradientBg 12s ease infinite;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #ffd6df;
             color: #4a3e40;
             padding: 20px;
             text-align: center;
@@ -31,7 +23,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
         }
 
         .container {
@@ -41,102 +32,78 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: relative;
-            z-index: 5;
         }
 
         h1 {
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             margin-bottom: 12px;
             color: #5c4a4c;
-            /* Максимально жирный шрифт */
-            font-weight: 900; 
-            letter-spacing: -0.8px;
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+            font-weight: 800; 
+            letter-spacing: -0.5px;
         }
 
         .hint {
             font-size: 0.95rem;
             color: #7a6064;
-            margin-bottom: 45px;
-            font-weight: 800; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.9;
+            margin-bottom: 35px;
+            font-weight: 600; 
         }
 
-        /* Банка-Кнопка с эффектом мягкого неонового свечения */
+        /* Банка-Кнопка */
         .jar-btn {
-            background: rgba(255, 255, 255, 0.85);
-            border: 4px solid #ffffff;
-            border-radius: 45px 45px 55px 55px;
-            width: 170px;
-            height: 235px;
+            background: #ffffff;
+            border: 3.5px solid #7a6064;
+            border-radius: 40px 40px 50px 50px;
+            width: 160px;
+            height: 220px;
             position: relative;
             cursor: pointer;
             outline: none;
-            /* Неоновое розово-белое свечение */
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 
-                        0 10px 30px rgba(255, 143, 163, 0.3),
-                        inset 0 0 15px rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-            /* Плавное покачивание банки в спокойном состоянии */
-            animation: gentleFloat 4s ease-in-out infinite;
+            box-shadow: 0 12px 24px rgba(122, 96, 100, 0.15);
+            transition: transform 0.1s ease;
         }
 
-        /* Крышка банки с металлическим переливом */
+        /* Крышка банки */
         .jar-btn::before {
             content: '';
             position: absolute;
-            top: -16px;
+            top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 95px;
-            height: 16px;
-            background: linear-gradient(135deg, #ffffff 0%, #f0e6e7 100%);
-            border: 4px solid #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            width: 90px;
+            height: 15px;
+            background: #ffffff;
+            border: 3.5px solid #7a6064;
+            border-radius: 6px;
         }
 
-        /* Эффекты при наведении и нажатии */
-        .jar-btn:hover {
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 
-                        0 15px 40px rgba(255, 143, 163, 0.5);
-        }
-
+        /* Эффект нажатия на баночку */
         .jar-btn:active {
-            transform: scale(0.92) rotate(-3deg);
-            animation: none;
+            transform: scale(0.94);
         }
 
         /* Контейнер для бумажек внутри банки */
         .jar-papers {
             position: absolute;
-            bottom: 18px;
-            left: 12px;
-            right: 12px;
-            height: 100px;
+            bottom: 15px;
+            left: 10px;
+            right: 10px;
+            height: 90px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-content: flex-end;
-            gap: 5px;
+            gap: 4px;
             pointer-events: none;
-            transition: opacity 0.5s ease;
         }
 
-        /* Красивые градиентные записочки внутри */
         .paper-clip {
-            width: 26px;
-            height: 15px;
-            background: linear-gradient(135deg, #ff8fa3 0%, #ff4d6d 100%);
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 24px;
+            height: 14px;
+            background: #ff8fa3;
+            border: 1.5px solid #7a6064;
+            border-radius: 3px;
             transform: rotate(var(--r));
-            transition: all 0.3s ease;
         }
 
         /* Задний темный фон окон */
@@ -146,101 +113,68 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(43, 35, 36, 0.4);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.35);
             z-index: 100;
             display: none;
-            animation: fadeInBg 0.4s ease forwards;
+            animation: fadeInBg 0.3s ease forwards;
         }
 
-        /* Всплывающее неоновое окошко */
+        /* Всплывающее окошко с анимацией */
         .modal-window {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.8);
             width: 90%;
-            max-width: 340px;
+            max-width: 320px;
             background: #ffffff;
-            padding: 40px 26px 26px 26px;
-            border-radius: 32px;
+            padding: 35px 24px 24px 24px;
+            border-radius: 24px;
+            border: 3.5px solid #7a6064;
             z-index: 101;
             display: none;
             text-align: center;
-            /* Мощная стильная тень и свечение карточки */
-            box-shadow: 0 20px 50px rgba(92, 74, 76, 0.3),
-                        0 0 0 6px rgba(255, 255, 255, 0.6);
-            animation: popUpWindow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            animation: popUpWindow 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
         }
 
-        /* Сверхжирный и крупный текст записки */
+        /* Жирный текст записки */
         .modal-text {
-            font-size: 1.25rem;
-            line-height: 1.6;
+            font-size: 1.15rem;
+            line-height: 1.5;
             color: #2b2324;
-            font-weight: 800; 
-            margin-bottom: 26px;
-            letter-spacing: -0.3px;
+            font-weight: 700; 
+            margin-bottom: 22px;
         }
 
-        /* Рамка для твоей фотки котика */
         .cat-img {
             width: 100%;
-            max-height: 240px;
-            object-fit: contain;
-            border-radius: 18px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            margin-bottom: 22px;
+            max-height: 230px;
+            object-fit: contain; /* Чтобы фото котика не обрезалось и отображалось полностью */
+            border-radius: 14px;
+            border: 2.5px solid #7a6064;
+            margin-bottom: 18px;
             display: none;
-            animation: fadeInBg 0.5s ease 0.2s forwards;
-            opacity: 0;
         }
 
-        /* Кнопка закрытия с градиентом и тенью */
+        /* Кнопка закрытия */
         .close-btn {
-            background: linear-gradient(135deg, #ff8fa3 0%, #ff4d6d 100%);
+            background: #ff8fa3;
             color: #ffffff;
-            border: none;
-            padding: 16px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 900; 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            border: 2.5px solid #7a6064;
+            padding: 14px;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: 700; 
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+            box-shadow: 0 4px 0 #7a6064;
             transition: transform 0.1s, box-shadow 0.1s;
         }
 
         .close-btn:active {
-            transform: scale(0.97) translateY(2px);
-            box-shadow: 0 3px 10px rgba(255, 77, 109, 0.4);
-        }
-
-        /* Эффект вылетающих сердечек при клике */
-        .heart-sparkle {
-            position: fixed;
-            color: #ff4d6d;
-            font-size: 24px;
-            pointer-events: none;
-            z-index: 999;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            animation: flyUpAndFade 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-        }
-
-        /* Ключевые кадры для всех анимаций */
-        @keyframes gradientBg {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes gentleFloat {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(1deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #7a6064;
         }
 
         @keyframes fadeInBg {
@@ -250,23 +184,12 @@
 
         @keyframes popUpWindow {
             from {
-                transform: translate(-50%, -50%) scale(0.7) rotate(-3deg);
+                transform: translate(-50%, -50%) scale(0.85);
                 opacity: 0;
             }
             to {
-                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                transform: translate(-50%, -50%) scale(1);
                 opacity: 1;
-            }
-        }
-
-        @keyframes flyUpAndFade {
-            0% {
-                transform: translate(0, 0) scale(0.5);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--rot));
-                opacity: 0;
             }
         }
     </style>
@@ -282,10 +205,85 @@
         </button>
     </div>
 
-    <!-- Элементы всплывающего окна -->
     <div class="modal-back" id="modal-bg"></div>
     <div class="modal-window" id="modal-box">
         <p class="modal-text" id="modal-txt"></p>
         <img src="" alt="Милый котик" class="cat-img" id="cat-pic">
         <button class="close-btn" id="close-button">Закрыть</button>
     </div>
+
+    <script>
+        const phrases = [
+            "Твоя улыбка буквально способна спасти этот мир. Улыбнись прямо сейчас!",
+            "Ты невероятно красивая, особенно когда сонная и без макияжа))",
+            "Обожаю твой голос. Готов слушать твои голосовые сообщения на повторе часами",
+            "В тебе сочетаются невероятный ум, доброта и капелька приятного безумия",
+            "Мне очень нравится твоя доброта ко мне",
+            "Я немного волнуюсь рядом с тобой, потому что боюсь тебя разочаровать",
+            "Мне безумно интересно слушать, когда ты о чем-то рассказываешь",
+            "Мне очень нравится когда ты меня мило называешь, мне всегда это поднимает настроение и день уже стал лучше",
+            "Извини если надоедаю тебе, просто мне с тобой комфортно",
+            "Приезжай пожалуйста почаще, я знаю что это не так просто, но мне очень нравится проводить с тобой время",
+            "Я хочу обниматься с тобой 24/7, хоть и сильно стесняюсь",
+            "Ты самая красивая девочка в этом мире!, помни это <3"
+        ];
+
+        // Подключил твой локальный файл картинки
+        const catUrl = "32d5e648d41919cd1c8c7d68cd956c86.jpg";
+        let step = 0;
+
+        const jarButton = document.getElementById('jar-button');
+        const papersBox = document.getElementById('papers-box');
+        const modalBg = document.getElementById('modal-bg');
+        const modalBox = document.getElementById('modal-box');
+        const modalTxt = document.getElementById('modal-txt');
+        const catPic = document.getElementById('cat-pic');
+        const closeButton = document.getElementById('close-button');
+        const mainTitle = document.getElementById('main-title');
+        const mainHint = document.getElementById('main-hint');
+
+        for (let i = 0; i < phrases.length; i++) {
+            const paper = document.createElement('div');
+            paper.classList.add('paper-clip');
+            paper.style.setProperty('--r', `${Math.random() * 40 - 20}deg`);
+            papersBox.appendChild(paper);
+        }
+
+        jarButton.onclick = function() {
+            if (step >= phrases.length) return;
+
+            modalTxt.textContent = phrases[step];
+
+            if (step === phrases.length - 1) {
+                catPic.src = catUrl;
+                catPic.style.display = 'block';
+                closeButton.textContent = "<3";
+                
+                mainTitle.textContent = "Баночка пуста";
+                mainHint.textContent = "Но ценю я тебя всё сильнее.";
+                papersBox.style.display = 'none';
+            }
+
+            modalBg.style.display = 'block';
+            modalBox.style.display = 'block';
+        };
+
+        function closeModal() {
+            modalBg.style.display = 'none';
+            modalBox.style.display = 'none';
+
+            if (step < phrases.length - 1) {
+                step++;
+                if (papersBox.lastChild) {
+                    papersBox.removeChild(papersBox.lastChild);
+                }
+            } else {
+                step++;
+            }
+        }
+
+        closeButton.onclick = closeModal;
+        modalBg.onclick = closeModal;
+    </script>
+</body>
+</html>
