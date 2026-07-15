@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Для тебя... <3</title>
     
-    <!-- Подключаем стильный, современный и очень жирный шрифт Montserrat -->
+    <!-- Подключаем сверхжирный шрифт -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -20,7 +20,6 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            /* Анимированный переливающийся фон */
             background: linear-gradient(45deg, #ffc2d1, #ffe5ec, #ffd6df, #ffb7b2);
             background-size: 400% 400%;
             animation: gradientBg 12s ease infinite;
@@ -32,7 +31,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         .container {
@@ -42,33 +41,28 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: relative;
-            z-index: 5;
         }
 
         h1 {
             font-size: 1.7rem;
             margin-bottom: 12px;
             color: #5c4a4c;
-            /* Максимально жирный шрифт */
             font-weight: 900; 
             letter-spacing: -0.8px;
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
         }
 
         .hint {
             font-size: 0.95rem;
             color: #7a6064;
             margin-bottom: 45px;
-            font-weight: 800; 
+            font-weight: 900; 
             text-transform: uppercase;
             letter-spacing: 1px;
-            opacity: 0.9;
         }
 
-        /* Банка-Кнопка с эффектом мягкого неонового свечения */
+        /* Банка-Кнопка (Теперь она ярко-розовая, её невозможно не заметить) */
         .jar-btn {
-            background: rgba(255, 255, 255, 0.85);
+            background: #ff8fa3;
             border: 4px solid #ffffff;
             border-radius: 45px 45px 55px 55px;
             width: 170px;
@@ -76,15 +70,9 @@
             position: relative;
             cursor: pointer;
             outline: none;
-            /* Неоновое розово-белое свечение */
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 
-                        0 10px 30px rgba(255, 143, 163, 0.3),
-                        inset 0 0 15px rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-            /* Плавное покачивание банки в спокойном состоянии */
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.4);
             animation: gentleFloat 4s ease-in-out infinite;
+            transition: transform 0.1s ease;
         }
 
         /* Крышка банки */
@@ -96,16 +84,9 @@
             transform: translateX(-50%);
             width: 95px;
             height: 16px;
-            background: linear-gradient(135deg, #ffffff 0%, #f0e6e7 100%);
-            border: 4px solid #ffffff;
+            background: #ffffff;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Эффекты при наведении и нажатии */
-        .jar-btn:hover {
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 
-                        0 15px 40px rgba(255, 143, 163, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .jar-btn:active {
@@ -126,36 +107,31 @@
             align-content: flex-end;
             gap: 5px;
             pointer-events: none;
-            transition: opacity 0.5s ease;
         }
 
-        /* Красивые градиентные записочки внутри */
+        /* Записочки внутри */
         .paper-clip {
             width: 26px;
             height: 15px;
-            background: linear-gradient(135deg, #ff8fa3 0%, #ff4d6d 100%);
+            background: #ffffff;
             border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transform: rotate(var(--r));
-            transition: all 0.3s ease;
         }
 
-        /* Задний темный фон окон */
+        /* Задний фон окон */
         .modal-back {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(43, 35, 36, 0.4);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 100;
             display: none;
-            animation: fadeInBg 0.4s ease forwards;
         }
 
-        /* Всплывающее неоновое окошко */
+        /* Всплывающее окошко с анимацией */
         .modal-window {
             position: fixed;
             top: 50%;
@@ -169,23 +145,20 @@
             z-index: 101;
             display: none;
             text-align: center;
-            /* Мощная стильная тень и свечение карточки */
-            box-shadow: 0 20px 50px rgba(92, 74, 76, 0.3),
-                        0 0 0 6px rgba(255, 255, 255, 0.6);
-            animation: popUpWindow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            animation: popUpWindow 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
         }
 
-        /* Сверхжирный и крупный текст записки */
+        /* Сверхжирный текст записки */
         .modal-text {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             line-height: 1.6;
             color: #2b2324;
-            font-weight: 800; 
+            font-weight: 900; 
             margin-bottom: 26px;
-            letter-spacing: -0.3px;
         }
 
-        /* Рамка для твоей фотки котика */
+        /* Рамка для фотки котика */
         .cat-img {
             width: 100%;
             max-height: 240px;
@@ -194,13 +167,11 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             margin-bottom: 22px;
             display: none;
-            animation: fadeInBg 0.5s ease 0.2s forwards;
-            opacity: 0;
         }
 
-        /* Кнопка закрытия с градиентом и тенью */
+        /* Кнопка закрытия */
         .close-btn {
-            background: linear-gradient(135deg, #ff8fa3 0%, #ff4d6d 100%);
+            background: #ff4d6d;
             color: #ffffff;
             border: none;
             padding: 16px;
@@ -208,30 +179,26 @@
             font-size: 1.1rem;
             font-weight: 900; 
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             cursor: pointer;
             width: 100%;
             box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
-            transition: transform 0.1s, box-shadow 0.1s;
         }
 
         .close-btn:active {
-            transform: scale(0.97) translateY(2px);
-            box-shadow: 0 3px 10px rgba(255, 77, 109, 0.4);
+            transform: scale(0.97);
         }
 
-        /* Эффект вылетающих сердечек при клике */
+        /* Вылетающие сердечки */
         .heart-sparkle {
             position: fixed;
             color: #ff4d6d;
-            font-size: 24px;
+            font-size: 28px;
             pointer-events: none;
             z-index: 999;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
             animation: flyUpAndFade 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
         }
 
-        /* Ключевые кадры для всех анимаций */
+        /* Все анимации */
         @keyframes gradientBg {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -239,36 +206,19 @@
         }
 
         @keyframes gentleFloat {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(1deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
-
-        @keyframes fadeInBg {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
         }
 
         @keyframes popUpWindow {
-            from {
-                transform: translate(-50%, -50%) scale(0.7) rotate(-3deg);
-                opacity: 0;
-            }
-            to {
-                transform: translate(-50%, -50%) scale(1) rotate(0deg);
-                opacity: 1;
-            }
+            from { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
         @keyframes flyUpAndFade {
-            0% {
-                transform: translate(0, 0) scale(0.5);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--rot));
-                opacity: 0;
-            }
+            0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.4); opacity: 0; }
         }
     </style>
 </head>
@@ -283,7 +233,6 @@
         </button>
     </div>
 
-    <!-- Элементы всплывающего окна -->
     <div class="modal-back" id="modal-bg"></div>
     <div class="modal-window" id="modal-box">
         <p class="modal-text" id="modal-txt"></p>
@@ -299,3 +248,54 @@
             "В тебе сочетаются невероятный ум, доброта и капелька приятного безумия",
             "Мне очень нравится твоя доброта ко мне",
             "Я немного волнуюсь рядом с тобой, потому что боюсь тебя разочаровать",
+            "Мне безумно интересно слушать, когда ты о чем-то рассказываешь",
+            "Мне очень нравится когда ты меня мило называешь, мне всегда это поднимает настроение и день уже стал лучше",
+            "Извини если надоедаю тебе, просто мне с тобой комфортно",
+            "Приезжай пожалуйста почаще, я знаю что это не так просто, но мне очень нравится проводить с тобой время",
+            "Я хочу обниматься с тобой 24/7, хоть и сильно стесняюсь",
+            "Ты самая красивая девочка в этом мире!, помни это <3"
+        ];
+
+        const catUrl = "32d5e648d41919cd1c8c7d68cd956c86.jpg";
+        let step = 0;
+
+        const jarButton = document.getElementById('jar-button');
+        const papersBox = document.getElementById('papers-box');
+        const modalBg = document.getElementById('modal-bg');
+        const modalBox = document.getElementById('modal-box');
+        const modalTxt = document.getElementById('modal-txt');
+        const catPic = document.getElementById('cat-pic');
+        const closeButton = document.getElementById('close-button');
+        const mainTitle = document.getElementById('main-title');
+        const mainHint = document.getElementById('main-hint');
+
+        // Создаем белые бумажки внутри банки
+        for (let i = 0; i < phrases.length; i++) {
+            const paper = document.createElement('div');
+            paper.classList.add('paper-clip');
+            paper.style.setProperty('--r', `${Math.random() * 50 - 25}deg`);
+            papersBox.appendChild(paper);
+        }
+
+        // Клик по банке
+        jarButton.onclick = function() {
+            if (step >= phrases.length) return;
+
+            // Расчет вылета сердечек
+            const rect = jarButton.getBoundingClientRect();
+            const startX = rect.left + rect.width / 2;
+            const startY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < 6; i++) {
+                createHeart(startX, startY);
+            }
+
+            modalTxt.textContent = phrases[step];
+
+            // На последнем шаге включаем твою картинку
+            if (step === phrases.length - 1) {
+                catPic.src = catUrl;
+                catPic.style.display = 'block';
+                closeButton.textContent = "<3";
+                
+mainTitle.textContent = "Баночка пуста";mainHint.textContent = "Но ценю я тебя всё сильнее.";papersBox.style.display = 'none';}modalBg.style.display = 'block';modalBox.style.display = 'block';};// Закрытие окнаfunction closeModal() {modalBg.style.display = 'none';modalBox.style.display = 'none';if (step < phrases.length - 1) {step++;if (papersBox.lastChild) {papersBox.removeChild(papersBox.lastChild);}} else {step++;}}closeButton.onclick = closeModal;modalBg.onclick = closeModal;// Генерация сердечекfunction createHeart(x, y) {const heart = document.createElement('div');heart.classList.add('heart-sparkle');heart.innerHTML = '❤️';heart.style.left = ${x}px;heart.style.top = ${y}px;const tx = (Math.random() * 160 - 80) + 'px';const ty = -(Math.random() * 120 + 60) + 'px';heart.style.setProperty('--tx', tx);heart.style.setProperty('--ty', ty);document.body.appendChild(heart);setTimeout(() => { heart.remove(); }, 1200);}
