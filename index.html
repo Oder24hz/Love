@@ -18,7 +18,6 @@
             color: #4a3e40;
             padding: 20px;
             text-align: center;
-            /* Идеальное центрирование всей страницы по вертикали и горизонтали */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -39,7 +38,6 @@
             font-size: 1.5rem;
             margin-bottom: 12px;
             color: #5c4a4c;
-            /* Сверхжирный шрифт для заголовка */
             font-weight: 800; 
             letter-spacing: -0.5px;
         }
@@ -48,7 +46,6 @@
             font-size: 0.95rem;
             color: #7a6064;
             margin-bottom: 35px;
-            /* Сделаем подсказку чуть плотнее */
             font-weight: 600; 
         }
 
@@ -119,7 +116,6 @@
             background: rgba(0, 0, 0, 0.35);
             z-index: 100;
             display: none;
-            /* Плавное проявление фона */
             animation: fadeInBg 0.3s ease forwards;
         }
 
@@ -139,7 +135,6 @@
             display: none;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            /* Плавный вылет окна с легким пружинящим эффектом */
             animation: popUpWindow 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
         }
 
@@ -148,7 +143,6 @@
             font-size: 1.15rem;
             line-height: 1.5;
             color: #2b2324;
-            /* Максимально жирный и выразительный текст */
             font-weight: 700; 
             margin-bottom: 22px;
         }
@@ -171,7 +165,6 @@
             padding: 14px;
             border-radius: 30px;
             font-size: 1.05rem;
-            /* Жирный текст кнопки */
             font-weight: 700; 
             cursor: pointer;
             width: 100%;
@@ -213,7 +206,6 @@
         </button>
     </div>
 
-    <!-- Компоненты окон -->
     <div class="modal-back" id="modal-bg"></div>
     <div class="modal-window" id="modal-box">
         <p class="modal-text" id="modal-txt"></p>
@@ -222,11 +214,15 @@
     </div>
 
     <script>
+        // Обновленный массив фраз с новыми строками в середине
         const phrases = [
             "Твоя улыбка буквально способна спасти этот мир. Улыбнись прямо сейчас!",
             "Ты невероятно красивая, особенно когда сонная и без макияжа))",
             "Обожаю твой голос. Готов слушать твои голосовые сообщения на повторе часами",
             "В тебе сочетаются невероятный ум, доброта и капелька приятного безумия",
+            "Мне очень нравится твоя доброта ко мне", // Новая
+            "Я немного волнуюсь рядом с тобой, потому что боюсь тебя разочаровать", // Новая (исправил опечатку "ты боюсь")
+            "Мне безумно интересно слушать, когда ты о чем-то рассказываешь", // Новая
             "Мне очень нравится когда ты меня мило называешь, мне всегда это поднимает настроение и день уже стал лучше",
             "Извини если надоедаю тебе, просто мне с тобой комфортно",
             "Приезжай пожалуйста чаще, я знаю что это не так легко, но мне очень нравится проводить с тобой время",
@@ -247,7 +243,6 @@
         const mainTitle = document.getElementById('main-title');
         const mainHint = document.getElementById('main-hint');
 
-        // Создаем декоративные бумажки внутри банки
         for (let i = 0; i < phrases.length; i++) {
             const paper = document.createElement('div');
             paper.classList.add('paper-clip');
@@ -255,7 +250,6 @@
             papersBox.appendChild(paper);
         }
 
-        // Клик по баночке
         jarButton.onclick = function() {
             if (step >= phrases.length) return;
 
@@ -271,12 +265,10 @@
                 papersBox.style.display = 'none';
             }
 
-            // Показываем окна
             modalBg.style.display = 'block';
             modalBox.style.display = 'block';
         };
 
-        // Закрытие записки
         function closeModal() {
             modalBg.style.display = 'none';
             modalBox.style.display = 'none';
