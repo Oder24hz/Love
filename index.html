@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кое-что для тебя... <3</title>
+    <style>
+        :root {
+            --bg-color: #fff5f5;
+            --primary-color: #ffb7b2;
+            --accent-color: #ff1744;
+            --text-color: #4a4a4a;
+            --jar-color: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #d90429;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+
+        .hint {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+
+        /* Дизайн баночки */
+        .jar-container {
+            position: relative;
+            width: 180px;
+            height: 240px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .jar-container:hover {
+            transform: scale(1.05);
+        }
+
+        .jar-container:active {
+            transform: scale(0.98) rotate(-3deg);
+        }
+
+        .jar {
+            width: 100%;
+            height: 100%;
+            background: var(--jar-color);
+            border: 4px solid #fff;
+            border-radius: 30px 30px 60px 60px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255,255,255,0.8);
+            position: relative;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Крышка баночки */
+        .jar::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: 20px;
+            background: #ffb7b2;
+            border: 3px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* Горлышко */
+        .jar::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 12px;
+            background: #fff;
+            border-radius: 4px;
+        }
+
+        /* Бирочка на банке */
+        .jar-label {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 8px 15px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #ff5c8a;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px dashed #ffb7b2;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        /* Наполнение баночки (записки внутри) */
+        .jar-contents {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 100px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: flex-end;
+            gap: 5px;
+            opacity: 0.8;
+            transition: opacity 0.5s ease;
+        }
+
+        .mini-note {
+            width: 25px;
+            height: 15px;
+            background: #ffcad4;
+            border-radius: 3px;
+            transform: rotate(var(--r));
+        }
+
+        /* Стили всплывающей записки */
+        .popup-note {
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 85%;
+            max-width: 320px;
+            background: #fff;
+            padding: 25px 20px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.25);
+            border: 2px solid #ffe5ec;
+            z-index: 10;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-note.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .popup-text {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .cat-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-top: 10px;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .close-btn {
+            background: #ffe5ec;
+            color: #ff5c8a;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background: #ffc2d1;
+        }
+
+        /* Задний фон при открытии записки */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(2px);
+            z-index: 9;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Анимация сердечек */
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            pointer-events: none;
+            animation: floatUp 2s linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px) scale(1.3) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+        <h1 id="main-title">Баночка с теплыми словами</h1>
+        <p class="hint" id="hint-text">Нажимай на баночку, чтобы доставать записки :)</p>
+
+        <div class="jar-container" id="jar-trigger">
+            <div class="jar">
+                <div class="jar-label">Для любимой 🌸</div>
+                <div class="jar-contents" id="jar-contents">
+                    <!-- Записочки внутри банки сгенерируются кодом -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Всплывающая карточка -->
+    <div class="popup-note" id="popup-note">
+        <p class="popup-text" id="popup-text">Текст записки...</p>
+        <img src="" alt="Милый котик" class="cat-image" id="cat-img">
+        <button class="close-btn" id="close-btn">Закрыть</button>
+    </div>
+
+    <script>
+        // Массив твоих фраз
+        const messages = [
+            "Твоя улыбка буквально способна спасти этот мир. Улыбнись прямо сейчас!",
+            "Ты невероятно красивая, особенно когда сонная и без макияжа))",
+            "Обожаю твой голос. Готов слушать твои голосовые сообщения на повторе часами",
+            "В тебе сочетаются невероятный ум, доброта и капелька приятного безумия",
+            "Мне очень нравится когда ты меня мило называешь, мне всегда это поднимает настроение и день уже стал лучше",
+            "Извини если надоедаю тебе, просто мне с тобой комфортно",
+            "Приезжай пожалуйста чаще, я знаю что это не так легко, но мне очень нравится проводить с тобой время",
+            "Я хочу обниматься с тобой 24/7, хоть и сильно стесняюсь",
+            "Ты самая красивая девочка в этом мире! <3" // Последнее сообщение
+        ];
+
+        // Замени на реальную ссылку на фото котика (например, из Pinterest или фотохостинга)
+        const catImageUrl = "https://unsplash.com"; 
+
+        let currentIndex = 0;
+
+        const jarTrigger = document.getElementById('jar-trigger');
+        const jarContents = document.getElementById('jar-contents');
+        const popupNote = document.getElementById('popup-note');
+        const popupText = document.getElementById('popup-text');
+        const catImg = document.getElementById('cat-img');
+        const closeBtn = document.getElementById('close-btn');
+        const overlay = document.getElementById('overlay');
+        const mainTitle = document.getElementById('main-title');
+        const hintText = document.getElementById('hint-text');
+
+        // Создаем декоративные записочки внутри банки
+        for (let i = 0; i < messages.length; i++) {
+            const miniNote = document.createElement('div');
+            miniNote.classList.add('mini-note');
+            miniNote.style.setProperty('--r', `${Math.random() * 40 - 20}deg`);
+            miniNote.style.background = `hsl(${340 + Math.random() * 20}, 100%, ${80 + Math.random() * 10}%)`;
+            jarContents.appendChild(miniNote);
+        }
+
