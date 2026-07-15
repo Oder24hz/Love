@@ -6,10 +6,10 @@
     <title>Для тебя... <3</title>
     <style>
         :root {
-            --bg-color: #faf5f5;
-            --text-color: #4e4a4a;
-            --accent-pink: #ff9ebb;
-            --heart-color: #ff527b;
+            --bg-color: #f7d6dc; /* Мягкий розовый фон, на котором банку отлично видно */
+            --text-color: #4a3e40;
+            --accent-pink: #ffaec1;
+            --heart-color: #ff477e;
         }
 
         * {
@@ -20,11 +20,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(at 20% 20%, #fff0f3 0px, transparent 50%),
-                radial-gradient(at 80% 40%, #ffe5ec 0px, transparent 50%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -40,75 +37,70 @@
             width: 100%;
             max-width: 400px;
             position: relative;
-            z-index: 5;
         }
 
         h1 {
             font-size: 1.3rem;
             margin-bottom: 8px;
-            color: #5c5556;
+            color: #5c4a4c;
             font-weight: 500;
-            letter-spacing: -0.3px;
         }
 
         .hint {
             font-size: 0.85rem;
-            color: #9c9294;
+            color: #8c7376;
             margin-bottom: 40px;
         }
 
-        /* Минималистичный и честный дизайн банки */
+        /* Надежная интерактивная зона */
         .jar-wrapper {
             position: relative;
             width: 160px;
             height: 230px;
             margin: 0 auto;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            z-index: 10; /* Поднимаем выше всего */
         }
 
+        /* Сама банка (теперь она полупрозрачно-белая и четко видна на розовом фоне) */
         .jar-body {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.4);
-            border: 2px solid #e5dcdd;
+            background: rgba(255, 255, 255, 0.75);
+            border: 2px solid #ffffff;
             border-radius: 40px 40px 50px 50px;
-            box-shadow: 0 10px 30px rgba(229, 220, 221, 0.5);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            transition: transform 0.2s ease, background-color 0.3s;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.1s ease;
         }
 
-        /* Крышка */
+        /* Простая и надежная крышка */
         .jar-wrapper::before {
             content: '';
             position: absolute;
             top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100px;
             height: 16px;
-            background: #f0e6e7;
-            border: 2px solid #e5dcdd;
+            background: #ffffff;
             border-radius: 6px;
-            z-index: 3;
-            transition: transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.1s ease;
         }
 
-        /* Анимации при нажатии */
+        /* Визуальный отклик при нажатии */
         .jar-wrapper:active .jar-body {
-            transform: scale(0.96) rotate(-2deg);
-            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0.95);
         }
         .jar-wrapper:active::before {
-            transform: scale(0.96) rotate(-2deg) translateY(2px);
+            transform: translateX(-50%) scale(0.95) translateY(2px);
         }
 
-        /* Записочки внутри банки */
+        /* Бумажки внутри банки */
         .jar-papers {
             position: absolute;
-            bottom: 25px;
+            bottom: 20px;
             left: 15px;
             right: 15px;
             height: 90px;
@@ -126,63 +118,44 @@
             height: 14px;
             background: var(--accent-pink);
             border-radius: 3px;
-            opacity: 0.7;
+            opacity: 0.9;
             transform: rotate(var(--r));
         }
 
-        /* Модальное окно (Поп-ап) */
+        /* Всплывающее окно (Поп-ап) */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(8c, 85, 86, 0.15);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: 10;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.show {
-            opacity: 1;
-            pointer-events: auto;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            display: none; /* Переключаем через display для надежности */
         }
 
         .card-popup {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -45%) scale(0.95);
+            transform: translate(-50%, -50%);
             width: 88%;
             max-width: 320px;
             background: #ffffff;
             padding: 30px 24px 24px 24px;
             border-radius: 24px;
-            box-shadow: 0 15px 40px rgba(156, 146, 148, 0.15);
-            border: 1px solid #f0e6e7;
-            z-index: 11;
-            opacity: 0;
-            pointer-events: none;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            display: none;
             text-align: center;
-        }
-
-        .card-popup.show {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-            pointer-events: auto;
         }
 
         .card-text {
             font-size: 1rem;
             line-height: 1.5;
-            color: #4e4a4a;
-            font-weight: 400;
+            color: #4a3e40;
+            font-weight: 500;
             margin-bottom: 20px;
-            word-wrap: break-word;
         }
 
         .cat-frame {
@@ -195,41 +168,30 @@
         }
 
         .action-btn {
-            background: #fff0f3;
-            color: #ff527b;
+            background: #fff0f2;
+            color: var(--heart-color);
             border: none;
-            padding: 10px 24px;
+            padding: 12px 24px;
             border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.95rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
             width: 100%;
         }
 
-        .action-btn:hover {
-            background: #ffe5ec;
-        }
-
-        /* Частицы сердечек */
+        /* Сердечки */
         .heart-particle {
             position: fixed;
             color: var(--heart-color);
-            font-size: 16px;
+            font-size: 20px;
             pointer-events: none;
             z-index: 999;
-            animation: flyUp 1.4s ease-out forwards;
+            animation: flyUp 1s ease-out forwards;
         }
 
         @keyframes flyUp {
-            0% {
-                transform: translate(0, 0) scale(0.5);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--mx), var(--my)) scale(1.2);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
         }
     </style>
 </head>
@@ -239,25 +201,20 @@
         <h1 id="title">Здесь кое-что для тебя</h1>
         <p class="hint" id="hint">Просто нажми на баночку</p>
 
-        <!-- Весь этот блок теперь является зоной клика -->
         <div class="jar-wrapper" id="jar-click-zone">
             <div class="jar-body"></div>
-            <div class="jar-papers" id="jar-papers-container">
-                <!-- Скрипт сам создаст записки -->
-            </div>
+            <div class="jar-papers" id="jar-papers-container"></div>
         </div>
     </div>
 
-    <!-- Компоненты окна -->
     <div class="modal-overlay" id="overlay"></div>
     <div class="card-popup" id="popup">
-        <p class="card-text" id="popup-text">Текст записки...</p>
+        <p class="card-text" id="popup-text"></p>
         <img src="" alt="Милый котик" class="cat-frame" id="cat-img">
         <button class="action-btn" id="close-btn">Закрыть</button>
     </div>
 
     <script>
-        // Твои фразы строго по порядку
         const phrases = [
             "Твоя улыбка буквально способна спасти этот мир. Улыбнись прямо сейчас!",
             "Ты невероятно красивая, особенно когда сонная и без макияжа))",
@@ -270,9 +227,7 @@
             "Ты самая красивая девочка в этом мире! <3"
         ];
 
-        // Прямая ссылка на милого котика (Unsplash)
         const catUrl = "https://unsplash.com";
-
         let currentStep = 0;
 
         const clickZone = document.getElementById('jar-click-zone');
@@ -285,26 +240,65 @@
         const mainTitle = document.getElementById('title');
         const mainHint = document.getElementById('hint');
 
-        // Генерируем маленькие бумажки внутри
+        // Создание бумажек внутри банки
         for (let i = 0; i < phrases.length; i++) {
             const paper = document.createElement('div');
             paper.classList.add('paper-clip');
-            paper.style.setProperty('--r', `${Math.random() * 50 - 25}deg`);
-            // Градиент нежных оттенков для наполнения
-            paper.style.background = `hsl(${340 + Math.random() * 20}, 90%, ${82 + Math.random() * 6}%)`;
+            paper.style.setProperty('--r', `${Math.random() * 40 - 20}deg`);
+            paper.style.background = `hsl(${340 + Math.random() * 15}, 95%, ${75 + Math.random() * 10}%)`;
             papersContainer.appendChild(paper);
         }
 
-        // Главный обработчик клика по банке
-        clickZone.addEventListener('click', (e) => {
+        // Самая надежная функция обработки клика/тапа
+        function openNote(e) {
             if (currentStep >= phrases.length) return;
 
-            // Создаем всплеск сердечек точно из места клика пальцем/мышкой
-            const clientX = e.clientX || e.touches[0].clientX;
-            const clientY = e.clientY || e.touches[0].clientY;
-            for (let i = 0; i < 6; i++) {
-                spawnHeart(clientX, clientY);
+            // Вылет сердечек строго вверх из банки (безошибочный расчет)
+            const rect = clickZone.getBoundingClientRect();
+            const spawnX = rect.left + rect.width / 2;
+            const spawnY = rect.top + rect.height / 3;
+            
+            for (let i = 0; i < 5; i++) {
+                spawnHeart(spawnX + (Math.random() * 40 - 20), spawnY);
             }
 
-            // Устанавливаем текст
+            // Наполнение окна текстом
             popupText.textContent = phrases[currentStep];
+
+            if (currentStep === phrases.length - 1) {
+                catImg.src = catUrl;
+                catImg.style.display = 'block';
+                closeBtn.textContent = "Ура! 💕";
+                mainTitle.textContent = "Баночка опустела";
+                mainHint.textContent = "Но мои чувства — нет.";
+                papersContainer.style.opacity = '0';
+            }
+
+            // Показываем элементы
+            overlay.style.display = 'block';
+            popup.style.display = 'block';
+        }
+
+        // Привязываем и к мышке, и к пальцу на смартфонах
+        clickZone.addEventListener('click', openNote);
+
+        function hideModal() {
+            overlay.style.display = 'none';
+            popup.style.display = 'none';
+
+            if (currentStep < phrases.length - 1) {
+                currentStep++;
+                if (papersContainer.lastChild) {
+                    papersContainer.removeChild(papersContainer.lastChild);
+                }
+            } else {
+                currentStep++;
+            }
+        }
+
+        closeBtn.addEventListener('click', hideModal);
+        overlay.addEventListener('click', hideModal);
+
+        function spawnHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
