@@ -14,44 +14,56 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #ffd6df; /* Контрастный нежно-розовый фон */
+            background-color: #ffd6df;
             color: #4a3e40;
-            padding: 40px 20px;
+            padding: 20px;
             text-align: center;
+            /* Идеальное центрирование всей страницы по вертикали и горизонтали */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
+            width: 100%;
             max-width: 400px;
-            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         h1 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
             color: #5c4a4c;
-            font-weight: 600;
+            /* Сверхжирный шрифт для заголовка */
+            font-weight: 800; 
+            letter-spacing: -0.5px;
         }
 
         .hint {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #7a6064;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
+            /* Сделаем подсказку чуть плотнее */
+            font-weight: 600; 
         }
 
-        /* Банка-Кнопка: теперь это реальный тег <button>, клик по которому сработает всегда */
+        /* Банка-Кнопка */
         .jar-btn {
             background: #ffffff;
-            border: 3px solid #7a6064;
+            border: 3.5px solid #7a6064;
             border-radius: 40px 40px 50px 50px;
             width: 160px;
             height: 220px;
-            margin: 0 auto;
             position: relative;
             cursor: pointer;
-            display: block;
             outline: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            transition: transform 0.1s;
+            box-shadow: 0 12px 24px rgba(122, 96, 100, 0.15);
+            transition: transform 0.1s ease;
         }
 
         /* Крышка банки */
@@ -64,13 +76,13 @@
             width: 90px;
             height: 15px;
             background: #ffffff;
-            border: 3px solid #7a6064;
+            border: 3.5px solid #7a6064;
             border-radius: 6px;
         }
 
-        /* Эффект нажатия */
+        /* Эффект нажатия на баночку */
         .jar-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.94);
         }
 
         /* Контейнер для бумажек внутри банки */
@@ -85,77 +97,108 @@
             justify-content: center;
             align-content: flex-end;
             gap: 4px;
-            pointer-events: none; /* Чтобы бумажки не мешали клику по кнопке */
+            pointer-events: none;
         }
 
         .paper-clip {
             width: 24px;
             height: 14px;
             background: #ff8fa3;
-            border: 1px solid #7a6064;
+            border: 1.5px solid #7a6064;
             border-radius: 3px;
             transform: rotate(var(--r));
         }
 
-        /* Простые и надежные всплывающие окна на чистом CSS */
+        /* Задний темный фон окон */
         .modal-back {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.35);
             z-index: 100;
             display: none;
+            /* Плавное проявление фона */
+            animation: fadeInBg 0.3s ease forwards;
         }
 
+        /* Всплывающее окошко с анимацией */
         .modal-window {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.8);
             width: 90%;
             max-width: 320px;
             background: #ffffff;
-            padding: 30px 20px 20px 20px;
-            border-radius: 20px;
-            border: 3px solid #7a6064;
+            padding: 35px 24px 24px 24px;
+            border-radius: 24px;
+            border: 3.5px solid #7a6064;
             z-index: 101;
             display: none;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            /* Плавный вылет окна с легким пружинящим эффектом */
+            animation: popUpWindow 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
         }
 
+        /* Жирный, красивый текст записки */
         .modal-text {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             line-height: 1.5;
-            color: #333333;
-            font-weight: 500;
-            margin-bottom: 20px;
+            color: #2b2324;
+            /* Максимально жирный и выразительный текст */
+            font-weight: 700; 
+            margin-bottom: 22px;
         }
 
         .cat-img {
             width: 100%;
             max-height: 200px;
             object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid #7a6064;
-            margin-bottom: 15px;
+            border-radius: 14px;
+            border: 2.5px solid #7a6064;
+            margin-bottom: 18px;
             display: none;
         }
 
+        /* Кнопка закрытия */
         .close-btn {
             background: #ff8fa3;
             color: #ffffff;
-            border: 2px solid #7a6064;
-            padding: 12px;
+            border: 2.5px solid #7a6064;
+            padding: 14px;
             border-radius: 30px;
-            font-size: 1rem;
-            font-weight: bold;
+            font-size: 1.05rem;
+            /* Жирный текст кнопки */
+            font-weight: 700; 
             cursor: pointer;
             width: 100%;
+            box-shadow: 0 4px 0 #7a6064;
+            transition: transform 0.1s, box-shadow 0.1s;
         }
 
         .close-btn:active {
-            transform: scale(0.98);
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #7a6064;
+        }
+
+        /* Ключевые кадры для анимаций */
+        @keyframes fadeInBg {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes popUpWindow {
+            from {
+                transform: translate(-50%, -50%) scale(0.85);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -165,13 +208,12 @@
         <h1 id="main-title">Кое-что для тебя...</h1>
         <p class="hint" id="main-hint">Нажми на баночку, чтобы открыть</p>
 
-        <!-- Теперь это полноценная кнопка -->
         <button class="jar-btn" id="jar-button" type="button">
             <div class="jar-papers" id="papers-box"></div>
         </button>
     </div>
 
-    <!-- Окна -->
+    <!-- Компоненты окон -->
     <div class="modal-back" id="modal-bg"></div>
     <div class="modal-window" id="modal-box">
         <p class="modal-text" id="modal-txt"></p>
@@ -205,7 +247,7 @@
         const mainTitle = document.getElementById('main-title');
         const mainHint = document.getElementById('main-hint');
 
-        // Создаем бумажки внутри
+        // Создаем декоративные бумажки внутри банки
         for (let i = 0; i < phrases.length; i++) {
             const paper = document.createElement('div');
             paper.classList.add('paper-clip');
@@ -213,14 +255,12 @@
             papersBox.appendChild(paper);
         }
 
-        // Самая простая и безотказная функция клика
+        // Клик по баночке
         jarButton.onclick = function() {
             if (step >= phrases.length) return;
 
-            // Заполняем текст карточки
             modalTxt.textContent = phrases[step];
 
-            // Если дошли до конца — включаем котика
             if (step === phrases.length - 1) {
                 catPic.src = catUrl;
                 catPic.style.display = 'block';
@@ -231,19 +271,18 @@
                 papersBox.style.display = 'none';
             }
 
-            // Показываем окно через прямое изменение стилей
+            // Показываем окна
             modalBg.style.display = 'block';
             modalBox.style.display = 'block';
         };
 
-        // Функция закрытия
+        // Закрытие записки
         function closeModal() {
             modalBg.style.display = 'none';
             modalBox.style.display = 'none';
 
             if (step < phrases.length - 1) {
                 step++;
-                // Убираем бумажку из банки
                 if (papersBox.lastChild) {
                     papersBox.removeChild(papersBox.lastChild);
                 }
